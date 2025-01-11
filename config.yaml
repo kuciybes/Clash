@@ -19,7 +19,16 @@ proxy-groups:
     type: select
     proxies:
       - "MySocks5Proxy"
+      - DIRECT
+
+rule-providers:
+  Russia-Allowed:
+    type: http
+    behavior: domain
+    path: ./rules/Russia-Allowed.yaml
+    url: https://raw.githubusercontent.com/itdoginfo/allow-domains/main/Russia/inside-clashx.lst
+    interval: 86400
 
 rules:
-  - RULE-SET,https://raw.githubusercontent.com/itdoginfo/allow-domains/main/Russia/inside-clashx.lst,ProxyGroup
+  - RULE-SET,Russia-Allowed,ProxyGroup
   - MATCH,DIRECT
